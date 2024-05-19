@@ -1,16 +1,12 @@
 import { useState } from 'react'
 
-function Counter() {
+const Counter = () => {
   const [count, setCount] = useState(99)
 
   return (
-    <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+    <button onClick={() => setCount((count) => count + 1)}>
+      count is {count}
+    </button>
   )
 }
 
