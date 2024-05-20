@@ -1,32 +1,28 @@
-import { useState } from 'react'
+import React from "react";
+import { connect } from "react-redux";
 
 const Counter = ({ counter, increment, decrement }) => {
-  const [count, setCount] = useState(99)
-
-  const handleIncrement=()=>{
-    setCount((prevCount) => prevCount +2)
-  }
-
-  const handleDecrement=()=>{
-    setCount((prevCount)=>Math.max(prevCount-1),0)
-  }
-
-
   return (
     <div>
-        <p className="counter_title">Counter: {count}</p>
-        <button className="button" onClick={handleIncrement}>
-            Increment
-        </button>
-
-        <button className="button" onClick={handleDecrement}>
-            Decrement
-        </button>
+      <p className="counter_title">Counter: {counter}</p>
+      <button className="button" onClick={increment}>
+        Increment
+      </button>
+      <button className="button" onClick={decrement}>
+        Decrement
+      </button>
     </div>
-//     <button onClick={() => setCount((count) => count + 1)}>
-//       count is {count}
-//     </button>
-  )
-}
+  );
+};
 
-export default Counter
+const mapStateToProps = (state) => ({
+  counter: state.counter.counter
+  //  Use 'counter: state.counter.counter' and replace this line if you are using combineReducer to ensure that 'counter' matches the correct key in your store
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch({ type: "INCREMENT" }),
+  decrement: () => dispatch({ type: "DECREMENT" })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
